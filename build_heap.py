@@ -3,9 +3,27 @@
 
 def build_heap(data):
     swaps = []
-    # TODO: Creat heap and heap sort
-    # try to achieve  O(n) and not O(n2)
+    
+     n = len(data)
 
+    # This loop sifts down all non-leaf nodes to create a max-heap
+    for i in range(n // 2 - 1, -1, -1):
+        j = i
+        while 2 * j + 1 < n:
+            k = j
+            # Check if left child is smaller than current node
+            if data[2 * j + 1] < data[k]:
+                k = 2 * j + 1
+            # Check if right child is smaller than current node and left child
+            if 2 * j + 2 < n and data[2 * j + 2] < data[k]:
+                k = 2 * j + 2
+            if j != k:
+                # Swap current node with smaller child
+                data[j], data[k] = data[k], data[j]
+                swaps.append((j, k))
+                j = k
+            else:
+                break
 
     return swaps
 
